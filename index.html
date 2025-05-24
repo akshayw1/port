@@ -7,7 +7,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
     <style>
-        .gradient-bg {
+        .name-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-gradient {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
         .card-hover {
@@ -15,16 +21,17 @@
         }
         .card-hover:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
         }
-        .section-fade {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease;
+        .page-section {
+            display: none;
         }
-        .section-fade.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .page-section.active {
+            display: block;
+        }
+        .nav-active {
+            background-color: #3b82f6;
+            color: white;
         }
     </style>
 </head>
@@ -35,55 +42,59 @@
     </button>
 
     <!-- Navigation -->
-    <nav id="sidebar" class="fixed left-0 top-0 h-full w-80 bg-white shadow-xl transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-40 overflow-y-auto">
+    <nav id="sidebar" class="fixed left-0 top-0 h-full w-80 bg-white shadow-xl transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-40 overflow-y-auto border-r border-gray-200">
         <div class="p-6">
             <!-- Profile Section -->
             <div class="text-center mb-8">
-                <div class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white text-4xl font-bold">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full bg-blue-600 flex items-center justify-center text-white text-4xl font-bold shadow-lg">
                     DA
                 </div>
-                <h2 class="text-xl font-bold text-gray-800">Dr. Divyanshu Awasthi</h2>
+                <h2 class="text-xl font-bold name-gradient">Dr. Divyanshu Awasthi</h2>
                 <p class="text-sm text-gray-600">Assistant Professor</p>
                 <p class="text-sm text-gray-600">GLA University, Mathura</p>
             </div>
 
             <!-- Contact Info -->
             <div class="mb-8 space-y-3">
-                <div class="flex items-center text-sm text-gray-600">
-                    <i class="fas fa-phone w-5"></i>
+                <div class="flex items-center text-sm text-gray-600 bg-gray-50 rounded-lg p-3">
+                    <i class="fas fa-phone w-5 text-green-600"></i>
                     <span>+91-8318737887</span>
                 </div>
-                <div class="flex items-center text-sm text-gray-600">
-                    <i class="fas fa-envelope w-5"></i>
+                <div class="flex items-center text-sm text-gray-600 bg-gray-50 rounded-lg p-3">
+                    <i class="fas fa-phone w-5 text-green-600"></i>
+                    <span>+91-9450596497</span>
+                </div>
+                <div class="flex items-center text-sm text-gray-600 bg-gray-50 rounded-lg p-3">
+                    <i class="fas fa-envelope w-5 text-blue-600"></i>
                     <span>divyanshuawasthi83@gmail.com</span>
                 </div>
             </div>
 
             <!-- Navigation Menu -->
             <ul class="space-y-2">
-                <li><a href="#about" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">About</a></li>
-                <li><a href="#education" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">Education</a></li>
-                <li><a href="#experience" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">Experience</a></li>
-                <li><a href="#research" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">Research</a></li>
-                <li><a href="#publications" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">Publications</a></li>
-                <li><a href="#skills" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">Skills</a></li>
-                <li><a href="#achievements" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">Achievements</a></li>
-                <li><a href="#service" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">Professional Service</a></li>
+                <li><a href="#" class="nav-link block px-4 py-3 text-gray-700 hover:bg-blue-100 hover:text-blue-800 rounded-lg transition-colors" data-page="home">Home</a></li>
+                <li><a href="#" class="nav-link block px-4 py-3 text-gray-700 hover:bg-blue-100 hover:text-blue-800 rounded-lg transition-colors" data-page="education">Education</a></li>
+                <li><a href="#" class="nav-link block px-4 py-3 text-gray-700 hover:bg-blue-100 hover:text-blue-800 rounded-lg transition-colors" data-page="experience">Experience</a></li>
+                <li><a href="#" class="nav-link block px-4 py-3 text-gray-700 hover:bg-blue-100 hover:text-blue-800 rounded-lg transition-colors" data-page="research">Research</a></li>
+                <li><a href="#" class="nav-link block px-4 py-3 text-gray-700 hover:bg-blue-100 hover:text-blue-800 rounded-lg transition-colors" data-page="publications">Publications</a></li>
+                <li><a href="#" class="nav-link block px-4 py-3 text-gray-700 hover:bg-blue-100 hover:text-blue-800 rounded-lg transition-colors" data-page="skills">Skills & Training</a></li>
+                <li><a href="#" class="nav-link block px-4 py-3 text-gray-700 hover:bg-blue-100 hover:text-blue-800 rounded-lg transition-colors" data-page="achievements">Achievements</a></li>
+                <li><a href="#" class="nav-link block px-4 py-3 text-gray-700 hover:bg-blue-100 hover:text-blue-800 rounded-lg transition-colors" data-page="service">Professional Service</a></li>
             </ul>
 
             <!-- Social Links -->
             <div class="mt-8 flex justify-center space-x-4">
-                <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
-                    <i class="fab fa-google text-xl"></i>
+                <a href="#" class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white hover:bg-red-700 transition-colors">
+                    <i class="fab fa-google text-lg"></i>
                 </a>
-                <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
-                    <i class="fab fa-researchgate text-xl"></i>
+                <a href="#" class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white hover:bg-blue-600 transition-colors">
+                    <i class="fab fa-researchgate text-lg"></i>
                 </a>
-                <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
-                    <i class="fab fa-linkedin text-xl"></i>
+                <a href="#" class="w-12 h-12 bg-blue-700 rounded-full flex items-center justify-center text-white hover:bg-blue-800 transition-colors">
+                    <i class="fab fa-linkedin text-lg"></i>
                 </a>
-                <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
-                    <i class="fab fa-orcid text-xl"></i>
+                <a href="#" class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center text-white hover:bg-green-700 transition-colors">
+                    <i class="fab fa-orcid text-lg"></i>
                 </a>
             </div>
         </div>
@@ -91,304 +102,640 @@
 
     <!-- Main Content -->
     <main class="md:ml-80 min-h-screen">
-        <!-- Hero Section -->
-        <section id="about" class="gradient-bg text-white py-20 px-6">
-            <div class="max-w-4xl mx-auto text-center">
-                <h1 class="text-5xl font-bold mb-6">Dr. Divyanshu Awasthi</h1>
-                <p class="text-xl mb-8">Assistant Professor | Digital Image Watermarking Researcher | AI Enthusiast</p>
-                <div class="bg-white/20 backdrop-blur-sm rounded-lg p-6 max-w-3xl mx-auto">
-                    <p class="text-lg italic">"Serving my organization and the nation by excelling in my field through smart work, technical skills and perseverance."</p>
+        <!-- Home Page -->
+        <div id="home" class="page-section active">
+            <!-- Hero Section -->
+            <section class="hero-gradient text-white py-20 px-6">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h1 class="text-5xl font-bold mb-6">Dr. Divyanshu Awasthi</h1>
+                    <p class="text-xl mb-8">Assistant Professor | Digital Image Watermarking Researcher | AI Enthusiast</p>
+                    <div class="bg-white bg-opacity-20 rounded-lg p-6 max-w-3xl mx-auto">
+                        <p class="text-lg italic">"Serving my organization and the nation by excelling in my field through smart work, technical skills and perseverance."</p>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Education Section -->
-        <section id="education" class="py-16 px-6 section-fade">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-3xl font-bold text-gray-800 mb-10 text-center">Educational Qualifications</h2>
-                <div class="grid gap-6">
-                    <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
-                        <div class="flex items-start justify-between">
+            <!-- Quick Stats -->
+            <section class="py-16 px-6 bg-gray-100">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-10 text-center">Research Overview</h2>
+                    <div class="grid md:grid-cols-4 gap-6">
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover border-l-4 border-purple-500">
+                            <div class="text-4xl font-bold text-purple-600 mb-2">21</div>
+                            <p class="text-gray-600">Journal Publications</p>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover border-l-4 border-blue-500">
+                            <div class="text-4xl font-bold text-blue-600 mb-2">9</div>
+                            <p class="text-gray-600">Conference Papers</p>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover border-l-4 border-green-500">
+                            <div class="text-4xl font-bold text-green-600 mb-2">5</div>
+                            <p class="text-gray-600">Book Chapters</p>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover border-l-4 border-orange-500">
+                            <div class="text-4xl font-bold text-orange-600 mb-2">9.5</div>
+                            <p class="text-gray-600">PhD CPI</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Current Position -->
+            <section class="py-16 px-6 bg-white">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-10 text-center">Current Position</h2>
+                    <div class="bg-blue-50 rounded-xl p-8 card-hover border-l-4 border-blue-600">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-2xl mr-6">
+                                G
+                            </div>
                             <div>
-                                <h3 class="text-xl font-bold text-gray-800 mb-2">Ph.D. in Electronics & Communication Engineering</h3>
-                                <p class="text-blue-600 font-semibold mb-2">Motilal Nehru National Institute of Technology Allahabad</p>
-                                <p class="text-gray-600 mb-4">CPI: 9.5 | Completed: November 2024</p>
-                                <div class="bg-gray-50 rounded-lg p-4">
-                                    <h4 class="font-semibold text-gray-700 mb-2">Thesis: Novel and Optimized Techniques for Performance Enhancement of Transform Domain Image Watermarking schemes</h4>
-                                    <p class="text-sm text-gray-600">Advisor: Prof. Vinay Kumar Srivastava</p>
+                                <h3 class="text-2xl font-bold text-gray-800">Assistant Professor</h3>
+                                <p class="text-blue-600 font-semibold text-lg">GLA University, Mathura, India</p>
+                                <p class="text-gray-600">August 2024 - Present | Pay Level-10</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Education Page -->
+        <div id="education" class="page-section">
+            <section class="py-16 px-6 bg-blue-600 text-white">
+                <div class="max-w-6xl mx-auto text-center">
+                    <h2 class="text-4xl font-bold mb-6">Educational Qualifications</h2>
+                    <p class="text-xl">Academic Excellence Throughout the Journey</p>
+                </div>
+            </section>
+
+            <section class="py-16 px-6 bg-gray-100">
+                <div class="max-w-6xl mx-auto space-y-8">
+                    <!-- PhD -->
+                    <div class="bg-white rounded-xl shadow-lg p-8 card-hover border-l-4 border-purple-600">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold text-gray-800 mb-2">Ph.D. in Electronics & Communication Engineering</h3>
+                                <p class="text-purple-600 font-semibold text-lg mb-2">Motilal Nehru National Institute of Technology Allahabad</p>
+                                <p class="text-gray-600 mb-4"><strong>CPI: 9.5</strong> | Completed: November 21, 2024</p>
+                                
+                                <div class="bg-purple-50 rounded-lg p-6">
+                                    <h4 class="font-bold text-gray-800 mb-3">Thesis Title:</h4>
+                                    <p class="text-gray-700 mb-3 italic">"Novel and Optimized Techniques for Performance Enhancement of Transform Domain Image Watermarking schemes"</p>
+                                    <p class="text-sm text-gray-600 mb-3"><strong>Advisor:</strong> Prof. Vinay Kumar Srivastava</p>
+                                    <p class="text-sm text-gray-600">Various metaheuristic and fuzzy inference system optimization techniques are used to enhance the performance of watermarking schemes. Real-time identity verification of patient is also carried out.</p>
                                 </div>
                             </div>
-                            <div class="text-3xl text-blue-500">🎓</div>
+                            <div class="text-6xl text-purple-500 ml-6">🎓</div>
                         </div>
                     </div>
 
-                    <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
+                    <!-- M.Tech -->
+                    <div class="bg-white rounded-xl shadow-lg p-8 card-hover border-l-4 border-blue-600">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold text-gray-800 mb-2">M.Tech (Signal Processing)</h3>
+                                <p class="text-blue-600 font-semibold text-lg mb-2">Motilal Nehru National Institute of Technology Allahabad</p>
+                                <p class="text-gray-600 mb-4"><strong>CPI: 9.65</strong> | Year: 2021</p>
+                                
+                                <div class="bg-blue-50 rounded-lg p-6">
+                                    <h4 class="font-bold text-gray-800 mb-3">Thesis Title:</h4>
+                                    <p class="text-gray-700 mb-3 italic">"LWT-DCT-SVD and DWT-DCT-SVD based watermarking schemes with performance enhancement using Jaya and Particle swarm optimization"</p>
+                                    <p class="text-sm text-gray-600 mb-3"><strong>Advisor:</strong> Prof. Vinay Kumar Srivastava</p>
+                                </div>
+                            </div>
+                            <div class="text-6xl text-blue-500 ml-6">📚</div>
+                        </div>
+                    </div>
+
+                    <!-- B.Tech -->
+                    <div class="bg-white rounded-xl shadow-lg p-8 card-hover border-l-4 border-green-600">
                         <div class="flex items-start justify-between">
                             <div>
-                                <h3 class="text-xl font-bold text-gray-800 mb-2">M.Tech (Signal Processing)</h3>
-                                <p class="text-blue-600 font-semibold mb-2">Motilal Nehru National Institute of Technology Allahabad</p>
-                                <p class="text-gray-600">CPI: 9.65 | Year: 2021</p>
+                                <h3 class="text-2xl font-bold text-gray-800 mb-2">B.Tech (Electronics & Communication Engineering)</h3>
+                                <p class="text-green-600 font-semibold text-lg mb-2">University of Allahabad, Prayagraj</p>
+                                <p class="text-gray-600"><strong>Percentage: 72.26%</strong> | Year: 2018</p>
                             </div>
-                            <div class="text-3xl text-green-500">📚</div>
+                            <div class="text-6xl text-green-500">🔧</div>
                         </div>
                     </div>
 
-                    <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
-                        <div class="flex items-start justify-between">
+                    <!-- Secondary Education -->
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-white rounded-xl shadow-lg p-6 card-hover border-l-4 border-orange-500">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Class XII</h3>
+                            <p class="text-orange-600 font-semibold mb-2">Uttar Pradesh Board, India</p>
+                            <p class="text-gray-600"><strong>86.8%</strong> | 2013</p>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-lg p-6 card-hover border-l-4 border-red-500">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Class X</h3>
+                            <p class="text-red-600 font-semibold mb-2">Uttar Pradesh Board, India</p>
+                            <p class="text-gray-600"><strong>89%</strong> | 2011</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Experience Page -->
+        <div id="experience" class="page-section">
+            <section class="py-16 px-6 bg-green-600 text-white">
+                <div class="max-w-6xl mx-auto text-center">
+                    <h2 class="text-4xl font-bold mb-6">Professional Experience</h2>
+                    <p class="text-xl">Academic Career and Achievements</p>
+                </div>
+            </section>
+
+            <section class="py-16 px-6 bg-white">
+                <div class="max-w-6xl mx-auto">
+                    <div class="bg-green-50 rounded-xl shadow-lg p-8 card-hover border-l-4 border-green-600">
+                        <div class="flex items-center mb-6">
+                            <div class="w-20 h-20 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-3xl mr-8 shadow-lg">
+                                G
+                            </div>
                             <div>
-                                <h3 class="text-xl font-bold text-gray-800 mb-2">B.Tech (Electronics & Communication Engineering)</h3>
-                                <p class="text-blue-600 font-semibold mb-2">University of Allahabad</p>
-                                <p class="text-gray-600">Percentage: 72.26% | Year: 2018</p>
+                                <h3 class="text-3xl font-bold text-gray-800">Assistant Professor</h3>
+                                <p class="text-green-600 font-semibold text-xl">GLA University, Mathura, India</p>
+                                <p class="text-gray-600 text-lg">Pay Level-10</p>
                             </div>
-                            <div class="text-3xl text-purple-500">🔧</div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Experience Section -->
-        <section id="experience" class="py-16 px-6 bg-gray-100 section-fade">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-3xl font-bold text-gray-800 mb-10 text-center">Working Experience</h2>
-                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
-                            G
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-gray-800">Assistant Professor</h3>
-                            <p class="text-blue-600 font-semibold">GLA University, Mathura, India</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center text-gray-600 mb-2">
-                        <i class="fas fa-calendar-alt mr-2"></i>
-                        <span>August 2024 - Present</span>
-                    </div>
-                    <div class="flex items-center text-gray-600">
-                        <i class="fas fa-money-bill-wave mr-2"></i>
-                        <span>Pay Level-10</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Research Interests -->
-        <section id="research" class="py-16 px-6 section-fade">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-3xl font-bold text-gray-800 mb-10 text-center">Research Interests</h2>
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover">
-                        <div class="text-4xl text-blue-500 mb-4">🔒</div>
-                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Digital Image Watermarking</h3>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover">
-                        <div class="text-4xl text-green-500 mb-4">🛡️</div>
-                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Information Security</h3>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover">
-                        <div class="text-4xl text-purple-500 mb-4">🔐</div>
-                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Cryptography</h3>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover">
-                        <div class="text-4xl text-red-500 mb-4">✅</div>
-                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Authentication</h3>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover">
-                        <div class="text-4xl text-yellow-500 mb-4">🖼️</div>
-                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Image Processing</h3>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover">
-                        <div class="text-4xl text-indigo-500 mb-4">🧠</div>
-                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Deep Learning</h3>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Publications Section -->
-        <section id="publications" class="py-16 px-6 bg-gray-100 section-fade">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-3xl font-bold text-gray-800 mb-10 text-center">Publications & Research Output</h2>
-                
-                <!-- Statistics Cards -->
-                <div class="grid md:grid-cols-4 gap-6 mb-10">
-                    <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover">
-                        <div class="text-3xl font-bold text-blue-600 mb-2">21</div>
-                        <p class="text-gray-600">Journal Publications</p>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover">
-                        <div class="text-3xl font-bold text-green-600 mb-2">9</div>
-                        <p class="text-gray-600">Conference Papers</p>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover">
-                        <div class="text-3xl font-bold text-purple-600 mb-2">5</div>
-                        <p class="text-gray-600">Book Chapters</p>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover">
-                        <div class="text-3xl font-bold text-red-600 mb-2">2</div>
-                        <p class="text-gray-600">Book Proposals</p>
-                    </div>
-                </div>
-
-                <!-- Featured Publications -->
-                <h3 class="text-2xl font-bold text-gray-800 mb-6">Featured Publications</h3>
-                <div class="space-y-6">
-                    <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
-                        <div class="flex items-start justify-between mb-4">
-                            <div class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold">
-                                Expert Systems with Applications (IF: 8.5)
+                        
+                        <div class="grid md:grid-cols-3 gap-6 mb-6">
+                            <div class="flex items-center text-gray-600">
+                                <i class="fas fa-calendar-alt mr-3 text-blue-500 text-xl"></i>
+                                <div>
+                                    <p class="font-semibold">Duration</p>
+                                    <p>August 2024 - Present</p>
+                                </div>
                             </div>
-                            <div class="text-sm text-gray-500">2024</div>
-                        </div>
-                        <h4 class="text-lg font-semibold text-gray-800 mb-2">RFDB: Robust watermarking scheme with Fuzzy-DnCNN using blockchain technique for identity verification</h4>
-                        <p class="text-gray-600 text-sm">Awasthi, D., Khare, P., & Srivastava, V. K.</p>
-                    </div>
-
-                    <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
-                        <div class="flex items-start justify-between mb-4">
-                            <div class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">
-                                Multimedia Tools and Applications (IF: 3.6)
+                            <div class="flex items-center text-gray-600">
+                                <i class="fas fa-map-marker-alt mr-3 text-red-500 text-xl"></i>
+                                <div>
+                                    <p class="font-semibold">Location</p>
+                                    <p>Mathura, India</p>
+                                </div>
                             </div>
-                            <div class="text-sm text-gray-500">2023</div>
-                        </div>
-                        <h4 class="text-lg font-semibold text-gray-800 mb-2">Multiple image watermarking with dual authentication for smart and safe city environment</h4>
-                        <p class="text-gray-600 text-sm">Awasthi, D., Srivastava, V.K.</p>
-                    </div>
-
-                    <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
-                        <div class="flex items-start justify-between mb-4">
-                            <div class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">
-                                Computers and Electrical Engineering (IF: 4.0)
+                            <div class="flex items-center text-gray-600">
+                                <i class="fas fa-briefcase mr-3 text-green-500 text-xl"></i>
+                                <div>
+                                    <p class="font-semibold">Department</p>
+                                    <p>Electronics & Communication</p>
+                                </div>
                             </div>
-                            <div class="text-sm text-gray-500">2024</div>
                         </div>
-                        <h4 class="text-lg font-semibold text-gray-800 mb-2">ANFIS optimization-based watermarking for securing integrity of medical images with blockchain authentication</h4>
-                        <p class="text-gray-600 text-sm">Awasthi, D., Khare, P., Srivastava, V. K., & Singh, A. K.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- Skills Section -->
-        <section id="skills" class="py-16 px-6 section-fade">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-3xl font-bold text-gray-800 mb-10 text-center">Technical Skills</h2>
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover">
-                        <div class="text-4xl text-orange-500 mb-4">🔬</div>
-                        <h3 class="text-lg font-semibold text-gray-800">MATLAB</h3>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover">
-                        <div class="text-4xl text-blue-500 mb-4">🐍</div>
-                        <h3 class="text-lg font-semibold text-gray-800">Python</h3>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover">
-                        <div class="text-4xl text-green-500 mb-4">🧩</div>
-                        <h3 class="text-lg font-semibold text-gray-800">Fuzzy Toolbox</h3>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover">
-                        <div class="text-4xl text-purple-500 mb-4">🤖</div>
-                        <h3 class="text-lg font-semibold text-gray-800">ANFIS Toolbox</h3>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover">
-                        <div class="text-4xl text-red-500 mb-4">📝</div>
-                        <h3 class="text-lg font-semibold text-gray-800">LaTeX</h3>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover">
-                        <div class="text-4xl text-yellow-500 mb-4">⚙️</div>
-                        <h3 class="text-lg font-semibold text-gray-800">Simulink</h3>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover">
-                        <div class="text-4xl text-indigo-500 mb-4">🔧</div>
-                        <h3 class="text-lg font-semibold text-gray-800">Proteus Design</h3>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Achievements Section -->
-        <section id="achievements" class="py-16 px-6 bg-gray-100 section-fade">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-3xl font-bold text-gray-800 mb-10 text-center">Scholastic Achievements</h2>
-                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
-                    <div class="flex items-start">
-                        <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mr-6">
-                            🏆
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-2">PF2MT Fellowship Scheme Shortlisted (2025)</h3>
-                            <p class="text-gray-600 mb-2">Malta Council for Science and Technology</p>
-                            <p class="text-sm text-gray-500">Competitive program supporting MSCA-applicants for funding (18-19 June 2025)</p>
+                        <div class="bg-white rounded-lg p-6 border border-gray-200">
+                            <h4 class="font-bold text-gray-800 mb-4">Key Responsibilities:</h4>
+                            <ul class="text-gray-600 space-y-3">
+                                <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>Teaching undergraduate and graduate courses in Electronics & Communication Engineering</li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>Conducting advanced research in Digital Image Watermarking and Information Security</li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>Supervising student projects and thesis work</li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>Publishing research papers in high-impact international journals</li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>Participating in academic committees and peer review activities</li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>Organizing and participating in international conferences</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
+            </section>
+        </div>
 
-                <!-- Training and Certifications -->
-                <h3 class="text-2xl font-bold text-gray-800 mb-6 mt-10">Training & Certifications</h3>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
-                        <h4 class="text-lg font-semibold text-gray-800 mb-2">NPTEL Deep Learning Certification</h4>
-                        <p class="text-sm text-gray-600 mb-2">Elite+Gold+Top 1%</p>
-                        <div class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold inline-block">Ph.D. Level</div>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
-                        <h4 class="text-lg font-semibold text-gray-800 mb-2">Machine Learning & Deep Learning</h4>
-                        <p class="text-sm text-gray-600 mb-2">IIT Patna - Hands-on Workshop</p>
-                        <div class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-semibold inline-block">Advanced</div>
+        <!-- Research Page -->
+        <div id="research" class="page-section">
+            <section class="py-16 px-6 bg-purple-600 text-white">
+                <div class="max-w-6xl mx-auto text-center">
+                    <h2 class="text-4xl font-bold mb-6">Research Interests</h2>
+                    <p class="text-xl">Cutting-edge Research in Digital Security and AI</p>
+                </div>
+            </section>
+
+            <section class="py-16 px-6 bg-gray-100">
+                <div class="max-w-6xl mx-auto">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover border-l-4 border-purple-500">
+                            <div class="text-5xl mb-4">🔒</div>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Digital Image Watermarking</h3>
+                            <p class="text-sm text-gray-600">Advanced techniques for copyright protection and authentication in digital media</p>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover border-l-4 border-blue-500">
+                            <div class="text-5xl mb-4">🛡️</div>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Information Security</h3>
+                            <p class="text-sm text-gray-600">Securing digital content and communications against cyber threats</p>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover border-l-4 border-green-500">
+                            <div class="text-5xl mb-4">🔐</div>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Cryptography</h3>
+                            <p class="text-sm text-gray-600">Encryption and decryption algorithms for secure data transmission</p>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover border-l-4 border-red-500">
+                            <div class="text-5xl mb-4">✅</div>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Authentication</h3>
+                            <p class="text-sm text-gray-600">Identity verification and validation systems for secure access</p>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover border-l-4 border-yellow-500">
+                            <div class="text-5xl mb-4">🖼️</div>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Image Processing</h3>
+                            <p class="text-sm text-gray-600">Digital image enhancement, analysis, and manipulation techniques</p>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover border-l-4 border-indigo-500">
+                            <div class="text-5xl mb-4">〰️</div>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Wavelets</h3>
+                            <p class="text-sm text-gray-600">Wavelet transforms and multiresolution signal processing</p>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover border-l-4 border-pink-500">
+                            <div class="text-5xl mb-4">🧠</div>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Deep Learning</h3>
+                            <p class="text-sm text-gray-600">Neural networks and AI applications in security and healthcare</p>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover border-l-4 border-teal-500">
+                            <div class="text-5xl mb-4">🗃️</div>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Data Hiding</h3>
+                            <p class="text-sm text-gray-600">Steganography and covert communication techniques</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
 
-        <!-- Professional Service -->
-        <section id="service" class="py-16 px-6 section-fade">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-3xl font-bold text-gray-800 mb-10 text-center">Professional Service</h2>
-                
-                <div class="grid md:grid-cols-2 gap-8">
-                    <!-- Reviewer Activities -->
-                    <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
-                        <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
-                            <i class="fas fa-user-edit text-blue-500 mr-3"></i>
+        <!-- Publications Page -->
+        <div id="publications" class="page-section">
+            <section class="py-16 px-6 bg-indigo-600 text-white">
+                <div class="max-w-6xl mx-auto text-center">
+                    <h2 class="text-4xl font-bold mb-6">Publications & Research Output</h2>
+                    <p class="text-xl">37 Total Publications in High-Impact Venues</p>
+                </div>
+            </section>
+
+            <section class="py-16 px-6 bg-white">
+                <div class="max-w-6xl mx-auto">
+                    <!-- Journal Publications -->
+                    <div class="mb-12">
+                        <h3 class="text-3xl font-bold text-gray-800 mb-8 flex items-center">
+                            <i class="fas fa-journal-whills text-indigo-600 mr-3"></i>
+                            Journal Publications (21)
+                        </h3>
+                        
+                        <div class="space-y-6">
+                            <!-- High Impact Factor Journals -->
+                            <div class="bg-indigo-50 rounded-xl shadow-lg p-6 card-hover border-l-4 border-indigo-600">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="bg-indigo-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                                        Expert Systems with Applications (IF: 8.5)
+                                    </div>
+                                    <div class="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">2024</div>
+                                </div>
+                                <h4 class="text-lg font-semibold text-gray-800 mb-2">RFDB: Robust watermarking scheme with Fuzzy-DnCNN using blockchain technique for identity verification</h4>
+                                <p class="text-gray-600 text-sm mb-2"><strong>Authors:</strong> Awasthi, D., Khare, P., & Srivastava, V. K.</p>
+                                <div class="text-xs text-gray-500">DOI: Expert Systems with Applications, 124554</div>
+                            </div>
+
+                            <div class="bg-indigo-50 rounded-xl shadow-lg p-6 card-hover border-l-4 border-indigo-600">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="bg-indigo-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                                        Expert Systems with Applications (IF: 8.5)
+                                    </div>
+                                    <div class="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">2023</div>
+                                </div>
+                                <h4 class="text-lg font-semibold text-gray-800 mb-2">A comprehensive review on optimization-based image watermarking techniques for copyright protection</h4>
+                                <p class="text-gray-600 text-sm mb-2"><strong>Authors:</strong> Awasthi, D., Tiwari, A., Khare, P., & Srivastava, V. K.</p>
+                                <div class="text-xs text-gray-500">DOI: Expert Systems with Applications, 122830</div>
+                            </div>
+
+                            <div class="bg-blue-50 rounded-xl shadow-lg p-6 card-hover border-l-4 border-blue-600">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                                        Computers and Electrical Engineering (IF: 4.0)
+                                    </div>
+                                    <div class="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">2024</div>
+                                </div>
+                                <h4 class="text-lg font-semibold text-gray-800 mb-2">ANFIS optimization-based watermarking for securing integrity of medical images with blockchain authentication</h4>
+                                <p class="text-gray-600 text-sm mb-2"><strong>Authors:</strong> Awasthi, D., Khare, P., Srivastava, V. K., & Singh, A. K.</p>
+                                <div class="text-xs text-gray-500">DOI: Computers and Electrical Engineering, 118, 109451</div>
+                            </div>
+
+                            <div class="text-center mt-8">
+                                <button class="bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors">
+                                    View All 21 Journal Publications
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Conference Publications -->
+                    <div class="mb-12">
+                        <h3 class="text-3xl font-bold text-gray-800 mb-8 flex items-center">
+                            <i class="fas fa-users text-green-600 mr-3"></i>
+                            Conference Publications (9)
+                        </h3>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-green-50 rounded-xl shadow-lg p-6 card-hover border-l-4 border-green-600">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-2">Dual Image Watermarking using Hessenberg decomposition and RDWT-DCT-SVD in YCbCr color space</h4>
+                                <p class="text-gray-600 text-sm mb-2"><strong>Authors:</strong> D. Awasthi and V. K. Srivastava</p>
+                                <p class="text-xs text-green-600 mb-2">ICCCIS 2022, Greater Noida, India</p>
+                                <div class="text-xs text-gray-500">DOI: 10.1109/ICCCIS56430.2022.10037592</div>
+                            </div>
+
+                            <div class="bg-blue-50 rounded-xl shadow-lg p-6 card-hover border-l-4 border-blue-600">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-2">Multiple Image Watermarking in YCbCr Color Space Using Schur-SVD-DCT in Wavelet Domain</h4>
+                                <p class="text-gray-600 text-sm mb-2"><strong>Authors:</strong> D. Awasthi, P. Khare and V. K. Srivastava</p>
+                                <p class="text-xs text-blue-600 mb-2">SPIN 2023, Noida, India</p>
+                                <div class="text-xs text-gray-500">DOI: 10.1109/SPIN57001.2023.10116129</div>
+                            </div>
+
+                            <div class="bg-purple-50 rounded-xl shadow-lg p-6 card-hover border-l-4 border-purple-600">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-2">DASHWmark: Dual Authentication Based Watermarking Technique in YCbCr Domain for Smart Healthcare System</h4>
+                                <p class="text-gray-600 text-sm mb-2"><strong>Authors:</strong> D. Awasthi, P. Khare and V. K. Srivastava</p>
+                                <p class="text-xs text-purple-600 mb-2">UPCON 2023, Gautam Buddha Nagar, India</p>
+                                <div class="text-xs text-gray-500">DOI: 10.1109/UPCON59197.2023.10434664</div>
+                            </div>
+
+                            <div class="bg-orange-50 rounded-xl shadow-lg p-6 card-hover border-l-4 border-orange-600">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-2">FISmark: Heritage Image Copyright Protection with FIS based Optimization</h4>
+                                <p class="text-gray-600 text-sm mb-2"><strong>Authors:</strong> P. Khare, D. Awasthi and V. K. Srivastava</p>
+                                <p class="text-xs text-orange-600 mb-2">SPIN 2024, Noida, India</p>
+                                <div class="text-xs text-gray-500">DOI: 10.1109/SPIN60856.2024.10511940</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Book Chapters -->
+                    <div class="mb-12">
+                        <h3 class="text-3xl font-bold text-gray-800 mb-8 flex items-center">
+                            <i class="fas fa-book text-orange-600 mr-3"></i>
+                            Book Chapters (5)
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="bg-orange-50 rounded-xl shadow-lg p-6 card-hover border-l-4 border-orange-600">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-2">Robust and Imperceptible Color Image Watermarking Using LWT, Schur Decomposition, and SVD in YCbCr Color Space</h4>
+                                <p class="text-gray-600 text-sm mb-2"><strong>Authors:</strong> Awasthi, D., Srivastava, V.K.</p>
+                                <p class="text-xs text-orange-600">Springer - VLSI, Communication and Signal Processing (2023)</p>
+                            </div>
+
+                            <div class="bg-red-50 rounded-xl shadow-lg p-6 card-hover border-l-4 border-red-600">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-2">A Secured Dual Image Watermarking technique using QR decomposition, Hénon map, and Chaotic encryption</h4>
+                                <p class="text-gray-600 text-sm mb-2"><strong>Authors:</strong> Awasthi, D., Khare P., Srivastava, V.K.</p>
+                                <p class="text-xs text-red-600">Taylor & Francis (2024)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Book Proposals -->
+                    <div>
+                        <h3 class="text-3xl font-bold text-gray-800 mb-8 flex items-center">
+                            <i class="fas fa-file-alt text-teal-600 mr-3"></i>
+                            Book Proposals (2) - Accepted
+                        </h3>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-teal-50 rounded-xl shadow-lg p-6 card-hover border-l-4 border-teal-600">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-2">Multimedia and Multimodal Intelligence for Sustainable Development</h4>
+                                <p class="text-teal-600 font-semibold">CRC Press, Taylor & Francis Group</p>
+                                <div class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold inline-block mt-2">Accepted</div>
+                            </div>
+
+                            <div class="bg-teal-50 rounded-xl shadow-lg p-6 card-hover border-l-4 border-teal-600">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-2">Emerging Trends in Multimedia Data Security and Computational Intelligence</h4>
+                                <p class="text-teal-600 font-semibold">IET Publishing</p>
+                                <div class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold inline-block mt-2">Accepted</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Skills & Training Page -->
+        <div id="skills" class="page-section">
+            <section class="py-16 px-6 bg-orange-600 text-white">
+                <div class="max-w-6xl mx-auto text-center">
+                    <h2 class="text-4xl font-bold mb-6">Technical Skills & Training</h2>
+                    <p class="text-xl">Expertise in Advanced Technologies and Tools</p>
+                </div>
+            </section>
+
+            <section class="py-16 px-6 bg-gray-100">
+                <div class="max-w-6xl mx-auto">
+                    <!-- Technical Skills -->
+                    <div class="mb-12">
+                        <h3 class="text-3xl font-bold text-gray-800 mb-8">Technical Skills</h3>
+                        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover border-l-4 border-orange-500">
+                                <div class="text-4xl mb-4">🔬</div>
+                                <h3 class="text-lg font-semibold text-gray-800">MATLAB</h3>
+                                <p class="text-sm text-gray-600">Advanced Programming</p>
+                            </div>
+                            <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover border-l-4 border-blue-500">
+                                <div class="text-4xl mb-4">🐍</div>
+                                <h3 class="text-lg font-semibold text-gray-800">Python</h3>
+                                <p class="text-sm text-gray-600">Data Science & ML</p>
+                            </div>
+                            <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover border-l-4 border-green-500">
+                                <div class="text-4xl mb-4">🧩</div>
+                                <h3 class="text-lg font-semibold text-gray-800">Fuzzy Toolbox</h3>
+                                <p class="text-sm text-gray-600">Fuzzy Logic Systems</p>
+                            </div>
+                            <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover border-l-4 border-purple-500">
+                                <div class="text-4xl mb-4">🤖</div>
+                                <h3 class="text-lg font-semibold text-gray-800">ANFIS Toolbox</h3>
+                                <p class="text-sm text-gray-600">Neuro-Fuzzy Systems</p>
+                            </div>
+                            <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover border-l-4 border-red-500">
+                                <div class="text-4xl mb-4">📝</div>
+                                <h3 class="text-lg font-semibold text-gray-800">LaTeX</h3>
+                                <p class="text-sm text-gray-600">Document Preparation</p>
+                            </div>
+                            <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover border-l-4 border-yellow-500">
+                                <div class="text-4xl mb-4">⚙️</div>
+                                <h3 class="text-lg font-semibold text-gray-800">Simulink</h3>
+                                <p class="text-sm text-gray-600">Model-Based Design</p>
+                            </div>
+                            <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover border-l-4 border-indigo-500">
+                                <div class="text-4xl mb-4">🔧</div>
+                                <h3 class="text-lg font-semibold text-gray-800">Proteus Design</h3>
+                                <p class="text-sm text-gray-600">Circuit Simulation</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Training & Certifications -->
+                    <div>
+                        <h3 class="text-3xl font-bold text-gray-800 mb-8">Training & Certifications</h3>
+                        <div class="space-y-6">
+                            <div class="bg-white rounded-xl shadow-lg p-6 card-hover border-l-4 border-green-600">
+                                <h4 class="text-xl font-semibold text-gray-800 mb-2">NPTEL Deep Learning Certification</h4>
+                                <p class="text-gray-600 mb-2"><strong>Elite+Gold+Top 1%</strong> - Advanced Level</p>
+                                <p class="text-sm text-gray-500">Completed during Ph.D. studies</p>
+                            </div>
+
+                            <div class="bg-white rounded-xl shadow-lg p-6 card-hover border-l-4 border-blue-600">
+                                <h4 class="text-xl font-semibold text-gray-800 mb-2">Machine Learning and Deep Learning for Medical Applications</h4>
+                                <p class="text-gray-600 mb-2"><strong>IIT Patna</strong> - Hands-on Workshop</p>
+                                <p class="text-sm text-gray-500">Advanced workshop on ML/DL algorithms for disease diagnosis and classification</p>
+                            </div>
+
+                            <div class="bg-white rounded-xl shadow-lg p-6 card-hover border-l-4 border-purple-600">
+                                <h4 class="text-xl font-semibold text-gray-800 mb-2">Machine Learning with Python & Analytics</h4>
+                                <p class="text-gray-600 mb-2"><strong>iHUB DivyaSampark, IIT Roorkee & RBPL</strong></p>
+                                <p class="text-sm text-gray-500">Comprehensive training in Python-based machine learning and data analytics</p>
+                            </div>
+
+                            <div class="bg-white rounded-xl shadow-lg p-6 card-hover border-l-4 border-orange-600">
+                                <h4 class="text-xl font-semibold text-gray-800 mb-2">ATAL FDP on Medical Imaging</h4>
+                                <p class="text-gray-600 mb-2"><strong>Maharaja Agrasen Institute of Technology</strong></p>
+                                <p class="text-sm text-gray-500">Advanced Techniques and Clinical Applications in Third Dimension Medical Imaging</p>
+                            </div>
+
+                            <div class="bg-white rounded-xl shadow-lg p-6 card-hover border-l-4 border-teal-600">
+                                <h4 class="text-xl font-semibold text-gray-800 mb-2">Communication Navigation & Surveillance</h4>
+                                <p class="text-gray-600 mb-2"><strong>Airport Authority of India - Civil Aviation Training College</strong></p>
+                                <p class="text-sm text-gray-500">Summer training during B.Tech 6th semester</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Achievements Page -->
+        <div id="achievements" class="page-section">
+            <section class="py-16 px-6 bg-yellow-600 text-white">
+                <div class="max-w-6xl mx-auto text-center">
+                    <h2 class="text-4xl font-bold mb-6">Achievements & Recognition</h2>
+                    <p class="text-xl">Awards, Fellowships, and Leadership Positions</p>
+                </div>
+            </section>
+
+            <section class="py-16 px-6 bg-white">
+                <div class="max-w-6xl mx-auto">
+                    <!-- Major Achievement -->
+                    <div class="mb-12">
+                        <h3 class="text-3xl font-bold text-gray-800 mb-8">Recent Achievement</h3>
+                        <div class="bg-yellow-50 rounded-xl shadow-lg p-8 card-hover border-l-4 border-yellow-600">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-20 h-20 bg-yellow-500 rounded-full flex items-center justify-center text-white text-3xl font-bold mr-8 shadow-lg">
+                                    🏆
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-bold text-gray-800 mb-3">PF2MT Fellowship Scheme Shortlisted (2025)</h3>
+                                    <p class="text-yellow-600 font-semibold text-lg mb-3">Malta Council for Science and Technology</p>
+                                    <p class="text-gray-600 mb-3">Competitive program supporting MSCA-applicants for funding</p>
+                                    <div class="bg-white rounded-lg p-4 border border-gray-200">
+                                        <p class="text-sm text-gray-600">
+                                            <strong>Program Date:</strong> 18-19 June 2025<br>
+                                            <strong>Significance:</strong> Highly competitive international fellowship supporting research mobility and career development
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Positions of Responsibility -->
+                    <div>
+                        <h3 class="text-3xl font-bold text-gray-800 mb-8">Positions of Responsibility</h3>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-blue-50 rounded-xl shadow-lg p-6 card-hover border-l-4 border-blue-600">
+                                <h4 class="text-xl font-semibold text-gray-800 mb-2">Session Chair</h4>
+                                <p class="text-blue-600 font-semibold mb-2">International Conference on Communication Control and Intelligent Systems</p>
+                                <p class="text-sm text-gray-600">Leading technical sessions and facilitating academic discussions</p>
+                            </div>
+
+                            <div class="bg-green-50 rounded-xl shadow-lg p-6 card-hover border-l-4 border-green-600">
+                                <h4 class="text-xl font-semibold text-gray-800 mb-2">Publicity Chair</h4>
+                                <p class="text-green-600 font-semibold mb-2">International Conference on Electronics, Computer, Physical and Chemical Sciences (ICECPCS 2024)</p>
+                                <p class="text-sm text-gray-600">Managing conference promotion and outreach activities</p>
+                            </div>
+
+                            <div class="bg-purple-50 rounded-xl shadow-lg p-6 card-hover border-l-4 border-purple-600">
+                                <h4 class="text-xl font-semibold text-gray-800 mb-2">Organizing Committee Member</h4>
+                                <p class="text-purple-600 font-semibold mb-2">International Conference on Microwave, Antenna and Communication (MAC 2023)</p>
+                                <p class="text-sm text-gray-600">Contributing to conference planning and execution</p>
+                            </div>
+
+                            <div class="bg-orange-50 rounded-xl shadow-lg p-6 card-hover border-l-4 border-orange-600">
+                                <h4 class="text-xl font-semibold text-gray-800 mb-2">Organizing Committee Member</h4>
+                                <p class="text-orange-600 font-semibold mb-2">Annual College Fest "AVIRBHAV"</p>
+                                <p class="text-sm text-gray-600">Organizing cultural and technical events for students</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Professional Service Page -->
+        <div id="service" class="page-section">
+            <section class="py-16 px-6 bg-teal-600 text-white">
+                <div class="max-w-6xl mx-auto text-center">
+                    <h2 class="text-4xl font-bold mb-6">Professional Service</h2>
+                    <p class="text-xl">Peer Review and Academic Community Contributions</p>
+                </div>
+            </section>
+
+            <section class="py-16 px-6 bg-gray-100">
+                <div class="max-w-6xl mx-auto">
+                    <!-- Journal Reviewer -->
+                    <div class="mb-12">
+                        <h3 class="text-3xl font-bold text-gray-800 mb-8 flex items-center">
+                            <i class="fas fa-user-edit text-teal-600 mr-3"></i>
                             Journal Reviewer
                         </h3>
-                        <div class="space-y-2">
-                            <div class="text-sm text-gray-600 bg-gray-50 px-3 py-2 rounded">Biomedical Signal Processing and Control</div>
-                            <div class="text-sm text-gray-600 bg-gray-50 px-3 py-2 rounded">Engineering Applications of Artificial Intelligence</div>
-                            <div class="text-sm text-gray-600 bg-gray-50 px-3 py-2 rounded">IEEE Access</div>
-                            <div class="text-sm text-gray-600 bg-gray-50 px-3 py-2 rounded">Scientific Reports</div>
-                            <div class="text-sm text-gray-600 bg-gray-50 px-3 py-2 rounded">Neural Computing and Applications</div>
-                            <div class="text-center mt-4">
-                                <span class="text-xs text-blue-600 font-semibold">+15 More Journals</span>
+                        
+                        <div class="bg-white rounded-xl shadow-lg p-8 card-hover border-l-4 border-teal-600">
+                            <p class="text-gray-600 mb-6">Serving as peer reviewer for 20+ international journals across multiple high-impact venues:</p>
+                            
+                            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                <div class="bg-teal-50 px-4 py-3 rounded-lg text-sm text-gray-700">Biomedical Signal Processing and Control</div>
+                                <div class="bg-teal-50 px-4 py-3 rounded-lg text-sm text-gray-700">Engineering Applications of Artificial Intelligence</div>
+                                <div class="bg-teal-50 px-4 py-3 rounded-lg text-sm text-gray-700">Digital Signal Processing</div>
+                                <div class="bg-teal-50 px-4 py-3 rounded-lg text-sm text-gray-700">Scientific Reports</div>
+                                <div class="bg-teal-50 px-4 py-3 rounded-lg text-sm text-gray-700">IEEE Access</div>
+                                <div class="bg-teal-50 px-4 py-3 rounded-lg text-sm text-gray-700">Transactions on Emerging Telecommunications Technologies</div>
+                                <div class="bg-teal-50 px-4 py-3 rounded-lg text-sm text-gray-700">The Imaging Science Journal</div>
+                                <div class="bg-teal-50 px-4 py-3 rounded-lg text-sm text-gray-700">Circuits, Systems, and Signal Processing</div>
+                                <div class="bg-teal-50 px-4 py-3 rounded-lg text-sm text-gray-700">Cluster Computing</div>
+                                <div class="bg-teal-50 px-4 py-3 rounded-lg text-sm text-gray-700">Signal, Image and Video Processing</div>
+                                <div class="bg-teal-50 px-4 py-3 rounded-lg text-sm text-gray-700">Multimedia Tools and Applications</div>
+                                <div class="bg-teal-50 px-4 py-3 rounded-lg text-sm text-gray-700">Neural Computing and Applications</div>
+                                <div class="bg-teal-50 px-4 py-3 rounded-lg text-sm text-gray-700">Computers, Materials & Continua</div>
+                                <div class="bg-teal-50 px-4 py-3 rounded-lg text-sm text-gray-700">Information Sciences</div>
+                                <div class="bg-teal-50 px-4 py-3 rounded-lg text-sm text-gray-700">Engineering Reports</div>
+                                <div class="bg-teal-50 px-4 py-3 rounded-lg text-sm text-gray-700">PeerJ Computer Science</div>
+                                <div class="bg-teal-50 px-4 py-3 rounded-lg text-sm text-gray-700">Iranian Journal of Science and Technology</div>
+                                <div class="bg-teal-50 px-4 py-3 rounded-lg text-sm text-gray-700">Mesopotamian Journal of Cyber Security</div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Conference Activities -->
-                    <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
-                        <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
-                            <i class="fas fa-users text-green-500 mr-3"></i>
-                            Conference Roles
+                    <!-- Conference Reviewer -->
+                    <div>
+                        <h3 class="text-3xl font-bold text-gray-800 mb-8 flex items-center">
+                            <i class="fas fa-users text-blue-600 mr-3"></i>
+                            Conference Reviewer & Committee Member
                         </h3>
-                        <div class="space-y-3">
-                            <div class="border-l-4 border-blue-500 pl-4">
-                                <h4 class="font-semibold text-gray-800">Session Chair</h4>
-                                <p class="text-sm text-gray-600">International Conference on Communication Control and Intelligent Systems</p>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-white rounded-xl shadow-lg p-6 card-hover border-l-4 border-blue-600">
+                                <h4 class="text-xl font-semibold text-gray-800 mb-4">Conference Reviews</h4>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i>CVIP (Computer Vision & Image Processing)</li>
+                                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i>MAC (Microwave, Antenna and Communication)</li>
+                                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i>International Conference on Intelligent Computing, Ningbo, China</li>
+                                </ul>
                             </div>
-                            <div class="border-l-4 border-green-500 pl-4">
-                                <h4 class="font-semibold text-gray-800">Publicity Chair</h4>
-                                <p class="text-sm text-gray-600">ICECPCS 2024</p>
-                            </div>
-                            <div class="border-l-4 border-purple-500 pl-4">
-                                <h4 class="font-semibold text-gray-800">Organizing Committee Member</h4>
-                                <p class="text-sm text-gray-600">MAC 2023, AVIRBHAV</p>
+
+                            <div class="bg-white rounded-xl shadow-lg p-6 card-hover border-l-4 border-purple-600">
+                                <h4 class="text-xl font-semibold text-gray-800 mb-4">Editorial Services</h4>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i>Book Proposal Reviewer - CRC Press</li>
+                                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i>Special Issue Reviewer</li>
+                                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i>Editorial Board Contributions</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
 
         <!-- Footer -->
         <footer class="bg-gray-800 text-white py-8 px-6">
@@ -397,29 +744,14 @@
                 <p class="text-gray-300 mb-4">Assistant Professor | Digital Image Watermarking Researcher</p>
                 
                 <div class="flex justify-center space-x-6 mb-6">
-                    <div class="flex items-center text-sm">
-                        <i class="fas fa-phone mr-2"></i>
+                    <div class="flex items-center text-sm bg-gray-700 rounded-lg px-4 py-2">
+                        <i class="fas fa-phone mr-2 text-green-400"></i>
                         <span>+91-8318737887</span>
                     </div>
-                    <div class="flex items-center text-sm">
-                        <i class="fas fa-envelope mr-2"></i>
+                    <div class="flex items-center text-sm bg-gray-700 rounded-lg px-4 py-2">
+                        <i class="fas fa-envelope mr-2 text-blue-400"></i>
                         <span>divyanshuawasthi83@gmail.com</span>
                     </div>
-                </div>
-                
-                <div class="flex justify-center space-x-4 mb-6">
-                    <a href="#" class="text-gray-300 hover:text-white transition-colors">
-                        <i class="fab fa-google text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-300 hover:text-white transition-colors">
-                        <i class="fab fa-researchgate text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-300 hover:text-white transition-colors">
-                        <i class="fab fa-linkedin text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-300 hover:text-white transition-colors">
-                        <i class="fab fa-orcid text-xl"></i>
-                    </a>
                 </div>
                 
                 <p class="text-gray-400 text-sm">&copy; 2025 Dr. Divyanshu Awasthi. All rights reserved.</p>
@@ -428,72 +760,36 @@
     </main>
 
     <script>
-        // Mobile menu toggle
+        // Page navigation
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pageSecitons = document.querySelectorAll('.page-section');
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const sidebar = document.getElementById('sidebar');
-        const navLinks = document.querySelectorAll('.nav-link');
 
+        // Mobile menu toggle
         mobileMenuBtn.addEventListener('click', () => {
             sidebar.classList.toggle('-translate-x-full');
         });
 
-        // Close sidebar when clicking nav links on mobile
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (window.innerWidth < 768) {
-                    sidebar.classList.add('-translate-x-full');
-                }
-            });
-        });
-
-        // Smooth scrolling for navigation links
+        // Navigation functionality
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                const targetId = link.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
-                if (targetSection) {
-                    targetSection.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        // Observe all sections with fade animation
-        const fadeElements = document.querySelectorAll('.section-fade');
-        fadeElements.forEach(el => observer.observe(el));
-
-        // Active navigation highlighting
-        const sections = document.querySelectorAll('section[id]');
-        const navLinksAll = document.querySelectorAll('.nav-link');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= (sectionTop - 200)) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinksAll.forEach(link => {
-                link.classList.remove('bg-blue-100', 'text-blue-600');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('bg-blue-100', 'text-blue-600');
+                const targetPage = link.getAttribute('data-page');
+                
+                // Remove active class from all nav links
+                navLinks.forEach(nav => nav.classList.remove('nav-active'));
+                // Add active class to clicked nav
+                link.classList.add('nav-active');
+                
+                // Hide all page sections
+                pageSecitons.forEach(section => section.classList.remove('active'));
+                // Show target page section
+                document.getElementById(targetPage).classList.add('active');
+                
+                // Close mobile menu if open
+                if (window.innerWidth < 768) {
+                    sidebar.classList.add('-translate-x-full');
                 }
             });
         });
@@ -505,14 +801,8 @@
             }
         });
 
-        // Parallax effect for hero section
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.gradient-bg');
-            if (hero) {
-                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-            }
-        });
+        // Set initial active nav
+        document.querySelector('[data-page="home"]').classList.add('nav-active');
     </script>
 </body>
 </html>
